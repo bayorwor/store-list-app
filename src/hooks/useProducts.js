@@ -9,7 +9,7 @@ export function useProducts(keyword = "", pageNumber = "") {
   useEffect(() => {
     const fetchData = async () => {
       const data = await fetch(
-        `https://storelistapi.herokuapp.com/api/v1/products?keyword=${keyword}&pageNumber=${pageNumber}`
+        `/api/v1/products?keyword=${keyword}&pageNumber=${pageNumber}`
       )
         .then((res) => res.json())
         .catch((err) => setErr(err));
