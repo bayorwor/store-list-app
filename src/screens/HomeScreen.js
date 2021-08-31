@@ -2,11 +2,19 @@ import React from "react";
 import { LinkContainer } from "react-router-bootstrap";
 import { Table, Button, Spinner, Alert, Image } from "react-bootstrap";
 import { FaTrash, FaEdit, FaEye } from "react-icons/fa";
-import { useProduct } from "../hooks/useProducts";
+import { useProducts } from "../hooks/useProducts";
+import Paginate from "../components/Paginate";
 // import Paginate from "../components/Paginate";
 
-const HomeScreen = () => {
-  const { loading, error, products } = useProduct("/api/v1/products");
+const HomeScreen = ({ match }) => {
+  const keyword = match.params.keyword;
+
+  const pageNumber = match.params.pageNumber || 1;
+
+  const { loading, error, page, pages, products } = useProducts(
+    keyword,
+    pageNumber
+  );
 
   if (loading) return <Spinner size="lg" />;
   return (
@@ -35,7 +43,7 @@ const HomeScreen = () => {
         </thead>
         <tbody>
           {error && <Alert>OOPS!! something went wrong</Alert>}
-          {products.products.map((product) => (
+          {products.map((product) => (
             <tr key={product._id}>
               <td>
                 <Image
@@ -76,7 +84,7 @@ const HomeScreen = () => {
           ))}
         </tbody>
       </Table>
-      {/* <Paginate pages={pages} page={page} /> */}
+      <Paginate pages={pages} page={page} keyword={keyword ? keyword : ""} />
     </>
   );
 };

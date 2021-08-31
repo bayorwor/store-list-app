@@ -9,7 +9,7 @@ import {
   Card,
   Button,
 } from "react-bootstrap";
-import { useProduct } from "../hooks/useProducts";
+import { useProduct } from "../hooks/useProduct";
 
 const DetailsScreen = ({ match }) => {
   const _id = match.params._id;
