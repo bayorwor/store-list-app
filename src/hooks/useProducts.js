@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-export function useProducts(keyword = "", pageNumber = "", url) {
+export function useProducts(keyword = "", pageNumber = "") {
   const [products, setProducts] = useState();
   const [pages, setPages] = useState();
   const [page, setPage] = useState();
@@ -9,9 +9,7 @@ export function useProducts(keyword = "", pageNumber = "", url) {
   useEffect(() => {
     const fetchData = async () => {
       const data = await fetch(
-        url
-          ? url
-          : `/api/v1/products?keyword=${keyword}&pageNumber=${pageNumber}`
+        `/api/v1/products?keyword=${keyword}&pageNumber=${pageNumber}`
       )
         .then((res) => res.json())
         .catch((err) => setErr(err));
@@ -22,7 +20,7 @@ export function useProducts(keyword = "", pageNumber = "", url) {
       setLoading(false);
     };
     fetchData();
-  }, [keyword, pageNumber, url]);
+  }, [keyword, pageNumber]);
   return {
     products,
     page,
