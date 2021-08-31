@@ -17,7 +17,7 @@ const DetailsScreen = ({ match }) => {
     loading,
     error,
     products: product,
-  } = useProduct(`/api/v1/products/${_id}`);
+  } = useProduct(`https://storelistapi.herokuapp.com/api/v1/products/${_id}`);
 
   if (loading) return <Spinner size="lg" />;
   if (error) return <Alert>OOPS!! something went wrong</Alert>;
